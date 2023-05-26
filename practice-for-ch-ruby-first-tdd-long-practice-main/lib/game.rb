@@ -14,10 +14,14 @@ class Game
 
   def run
     until game_over?
+      render
       puts "Choose a tower to move a disc from (1, 2, or 3)..."
-      chosen_tower_1 = gets.chomp.to_i - 1
+      chosen_tower_1 = @towers[gets.chomp.to_i - 1]
       chosen_disc = chosen_tower_1.pop
-      puts ""
+      puts "Now which tower do you want to put the disc on (1, 2, or 3)...?"
+      chosen_tower_2 = @towers[gets.chomp.to_i - 1]
+      chosen_tower_2.push(chosen_disc)
+      system("clear")
     end
   end
 
@@ -40,9 +44,9 @@ class Game
 
   end
   def game_over?
-    @towers.last.size == @height
+    @towers.last.stack.size == @height
   end
 end
 
-game = Game.new(3,3)
-game.render
+game = Game.new(5,5)
+game.run
